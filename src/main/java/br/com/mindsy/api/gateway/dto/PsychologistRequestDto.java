@@ -3,7 +3,6 @@ package br.com.mindsy.api.gateway.dto;
 import br.com.mindsy.api.gateway.dto.enums.PhoneTypeEnum;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class PsychologistRequestDto implements Serializable {
 
@@ -15,7 +14,7 @@ public class PsychologistRequestDto implements Serializable {
     private PhoneTypeEnum phoneType;
     private String crp;
     private String password;
-    private Date birthDate;
+    private String birthDate;
     private String CNPJHospital;
 
     public String getName() {
@@ -66,11 +65,11 @@ public class PsychologistRequestDto implements Serializable {
         this.password = password;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

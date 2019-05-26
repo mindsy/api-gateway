@@ -2,6 +2,9 @@ package br.com.mindsy.api.gateway.controller;
 
 import br.com.mindsy.api.gateway.dto.PsychologistRequestDto;
 import br.com.mindsy.api.gateway.dto.PsychologistResponseDto;
+import br.com.mindsy.api.gateway.exception.ApiGatewayException;
+import br.com.mindsy.api.gateway.exception.InvalidParameterException;
+import br.com.mindsy.api.gateway.exception.PersonAlredyExistsException;
 import br.com.mindsy.api.gateway.service.PsychologistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +20,7 @@ public class PsychologistController {
     private PsychologistService psychologistService;
 
     @PostMapping
-    public PsychologistResponseDto insert(@RequestBody PsychologistRequestDto psychologistRequestDto) {
+    public PsychologistResponseDto insert(@RequestBody PsychologistRequestDto psychologistRequestDto) throws InvalidParameterException, PersonAlredyExistsException, ApiGatewayException {
         return psychologistService.insert(psychologistRequestDto);
     }
 }
