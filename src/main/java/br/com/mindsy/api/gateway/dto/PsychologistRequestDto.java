@@ -5,7 +5,7 @@ import br.com.mindsy.api.gateway.dto.enums.PhoneTypeEnum;
 import java.io.Serializable;
 import java.util.Date;
 
-public class PsychologistDto implements Serializable {
+public class PsychologistRequestDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
