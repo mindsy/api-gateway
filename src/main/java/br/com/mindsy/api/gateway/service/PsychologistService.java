@@ -9,10 +9,14 @@ import br.com.mindsy.api.gateway.exception.InvalidParameterException;
 import br.com.mindsy.api.gateway.exception.PersonAlredyExistsException;
 import br.com.mindsy.api.gateway.exception.UserNotFoundException;
 import br.com.mindsy.api.gateway.mapper.PsychologistMapper;
+import br.com.mindsy.api.gateway.model.PsychologistEntity;
+import br.com.mindsy.api.gateway.repository.PsychologistRepository;
 import br.com.mindsy.api.gateway.service.feign.PsychologistFeign;
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class PsychologistService {
@@ -22,6 +26,9 @@ public class PsychologistService {
 
     @Autowired
     private PsychologistMapper psychologistMapper;
+
+    @Autowired
+    private PsychologistRepository psychologistRepository;
 
     public MessageResponseDto insert(final PsychologistRequestDto psychologistRequestDto) throws PersonAlredyExistsException, InvalidParameterException, ApiGatewayException {
         PsychologistBackEndDto psychologistBackEndDto = psychologistMapper.requestToBack(psychologistRequestDto);
@@ -70,7 +77,6 @@ public class PsychologistService {
                 throw new ApiGatewayException("Erro Interno", e);
             }
         }
-
     }
 
     public PsychologistResponseDto find(final String crp) throws UserNotFoundException, ApiGatewayException {
@@ -85,6 +91,11 @@ public class PsychologistService {
             }
         }
 
+    }
+
+    public boolean validateToken(final String crp) {
+        Optional<PsychologistEntity> psychologistEntity = psychologistRepository.findById(crp);
+        return true;
     }
 
 }
