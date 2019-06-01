@@ -99,10 +99,6 @@ public class PsychologistService {
     }
 
     public boolean validateToken(final String crp) {
-        Optional<PsychologistEntity> psychologistEntity = psychologistRepository.findById(crp);
-        Iterable<PsychologistEntity> psychologistEntitys = psychologistRepository.findAll();
-        Iterable<PersonEntity> persons= personRepository.findAll();
-
         return true;
     }
 
