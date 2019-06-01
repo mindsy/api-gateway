@@ -1,15 +1,17 @@
 package br.com.mindsy.api.gateway.service;
 
+import br.com.mindsy.api.gateway.dto.MessageResponseDto;
 import br.com.mindsy.api.gateway.dto.PsychologistBackEndDto;
 import br.com.mindsy.api.gateway.dto.PsychologistRequestDto;
-import br.com.mindsy.api.gateway.dto.MessageResponseDto;
 import br.com.mindsy.api.gateway.dto.PsychologistResponseDto;
 import br.com.mindsy.api.gateway.exception.ApiGatewayException;
 import br.com.mindsy.api.gateway.exception.InvalidParameterException;
 import br.com.mindsy.api.gateway.exception.PersonAlredyExistsException;
 import br.com.mindsy.api.gateway.exception.UserNotFoundException;
 import br.com.mindsy.api.gateway.mapper.PsychologistMapper;
+import br.com.mindsy.api.gateway.model.PersonEntity;
 import br.com.mindsy.api.gateway.model.PsychologistEntity;
+import br.com.mindsy.api.gateway.repository.PersonRepository;
 import br.com.mindsy.api.gateway.repository.PsychologistRepository;
 import br.com.mindsy.api.gateway.service.feign.PsychologistFeign;
 import feign.FeignException;
@@ -29,6 +31,9 @@ public class PsychologistService {
 
     @Autowired
     private PsychologistRepository psychologistRepository;
+
+    @Autowired
+    private PersonRepository personRepository;
 
     public MessageResponseDto insert(final PsychologistRequestDto psychologistRequestDto) throws PersonAlredyExistsException, InvalidParameterException, ApiGatewayException {
         PsychologistBackEndDto psychologistBackEndDto = psychologistMapper.requestToBack(psychologistRequestDto);
@@ -95,6 +100,9 @@ public class PsychologistService {
 
     public boolean validateToken(final String crp) {
         Optional<PsychologistEntity> psychologistEntity = psychologistRepository.findById(crp);
+        Iterable<PsychologistEntity> psychologistEntitys = psychologistRepository.findAll();
+        Iterable<PersonEntity> persons= personRepository.findAll();
+
         return true;
     }
 

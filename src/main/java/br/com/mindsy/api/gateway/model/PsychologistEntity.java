@@ -1,14 +1,11 @@
 package br.com.mindsy.api.gateway.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(schema = "MINDSY", name = "PSYCHOLOGISTS")
+@Table(name = "PSYCHOLOGIST")
 public class PsychologistEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -17,17 +14,18 @@ public class PsychologistEntity implements Serializable {
     @Column(name = "crp")
     private String crp;
 
-    @Column(name = "dt_birth")
+    @Column(name = "dt_birth", nullable = false)
     private Date birthDate;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "token")
     private String token;
 
-    @Column(name = "fk_person")
-    private Long person;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_person", unique = true, nullable = false)
+    private PersonEntity person;
 
     public String getCrp() {
         return crp;
@@ -61,11 +59,11 @@ public class PsychologistEntity implements Serializable {
         this.token = token;
     }
 
-    public Long getPerson() {
+    public PersonEntity getPerson() {
         return person;
     }
 
-    public void setPerson(Long person) {
+    public void setPerson(PersonEntity person) {
         this.person = person;
     }
 }
