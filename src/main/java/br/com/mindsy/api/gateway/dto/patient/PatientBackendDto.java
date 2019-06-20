@@ -1,25 +1,24 @@
-package br.com.mindsy.api.gateway.dto;
+package br.com.mindsy.api.gateway.dto.patient;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-public class PatientResponseBackDto implements Serializable {
+public class PatientBackendDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private String name;
+    private String status;
+    private String number;
     private String email;
-    private List<PhoneBackendDto> telephone = new ArrayList<>();
-    private Long id_patient;
+    private String telephone_type;
+    private String date_of_birth;
+    private String kinship_degree;
     private String scholarity;
     private String observation;
     private String manual_domain;
     private String registry_number_pat;
-    private String date_of_birth;
-    private String status;
     private String registry_number_acc;
-    private String kinship_degree;
+    private String crp;
 
     public String getName() {
         return name;
@@ -29,28 +28,44 @@ public class PatientResponseBackDto implements Serializable {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getStatus() {
+        return status;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public List<PhoneBackendDto> getTelephone() {
-        return telephone;
+    public String getNumber() {
+        return number;
     }
 
-    public void setTelephone(List<PhoneBackendDto> telephone) {
-        this.telephone = telephone;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public Long getId_patient() {
-        return id_patient;
+    public String getTelephone_type() {
+        return telephone_type;
     }
 
-    public void setId_patient(Long id_patient) {
-        this.id_patient = id_patient;
+    public void setTelephone_type(String telephone_type) {
+        this.telephone_type = telephone_type;
+    }
+
+    public String getDate_of_birth() {
+        return date_of_birth;
+    }
+
+    public void setDate_of_birth(String date_of_birth) {
+        this.date_of_birth = date_of_birth;
+    }
+
+    public String getKinship_degree() {
+        return kinship_degree;
+    }
+
+    public void setKinship_degree(String kinship_degree) {
+        this.kinship_degree = kinship_degree;
     }
 
     public String getScholarity() {
@@ -85,22 +100,6 @@ public class PatientResponseBackDto implements Serializable {
         this.registry_number_pat = registry_number_pat;
     }
 
-    public String getDate_of_birth() {
-        return date_of_birth;
-    }
-
-    public void setDate_of_birth(String date_of_birth) {
-        this.date_of_birth = date_of_birth;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getRegistry_number_acc() {
         return registry_number_acc;
     }
@@ -109,11 +108,19 @@ public class PatientResponseBackDto implements Serializable {
         this.registry_number_acc = registry_number_acc;
     }
 
-    public String getKinship_degree() {
-        return kinship_degree;
+    public String getCrp() {
+        return crp;
     }
 
-    public void setKinship_degree(String kinship_degree) {
-        this.kinship_degree = kinship_degree;
+    public void setCrp(String crp) {
+        this.crp = crp;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

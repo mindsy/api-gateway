@@ -1,6 +1,10 @@
 package br.com.mindsy.api.gateway.service;
 
 import br.com.mindsy.api.gateway.dto.*;
+import br.com.mindsy.api.gateway.dto.authentication.TokenRespnseDto;
+import br.com.mindsy.api.gateway.dto.psychologist.PsychologistBackEndDto;
+import br.com.mindsy.api.gateway.dto.psychologist.PsychologistRequestDto;
+import br.com.mindsy.api.gateway.dto.psychologist.PsychologistResponseDto;
 import br.com.mindsy.api.gateway.exception.*;
 import br.com.mindsy.api.gateway.mapper.PsychologistMapper;
 import br.com.mindsy.api.gateway.service.feign.PsychologistFeign;
@@ -83,22 +87,12 @@ public class PsychologistService {
     }
 
     public void validateToken(final String crp, String token)
-            throws ObjectAlredyExistsException, ApiGatewayException, UnauthorizadExeption {
-        try {
-            TokenRespnseDto tokenRespnseDto = psychologistFeign.getToken(crp);
-            token = token.replace("Bearer ", "").trim();
-            if(tokenRespnseDto.getToken() == null || !tokenRespnseDto.getToken().equalsIgnoreCase(token)) {
-                throw new UnauthorizadExeption("Não autorizado");
-            }
-        } catch (FeignException e) {
-            switch (e.status()) {
-                case 404:
-                    throw new ObjectAlredyExistsException("Usuário não encontrado", e);
-                case 401:
-                    throw new UnauthorizadExeption("Não autorizado");
-                default:
-                    throw new ApiGatewayException("Erro Interno", e);
-            }
+            throws UnauthorizadExeption {
+        TokenRespnseDto tokenRespnseDto = psychologistFeign.getToken(crp);
+        token = token.replace("Bearer ", "").trim();
+        if(tokenRespnseDto.getToken() == null || !tokenRespnseDto.getToken().equalsIgnoreCase(token)) {
+            throw new UnauthorizadExeption("Não autorizado");
         }
+
     }
 }

@@ -1,7 +1,7 @@
 package br.com.mindsy.api.gateway.mapper;
 
-import br.com.mindsy.api.gateway.dto.PsychologistBackEndDto;
-import br.com.mindsy.api.gateway.dto.PsychologistRequestDto;
+import br.com.mindsy.api.gateway.dto.psychologist.PsychologistBackEndDto;
+import br.com.mindsy.api.gateway.dto.psychologist.PsychologistRequestDto;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")

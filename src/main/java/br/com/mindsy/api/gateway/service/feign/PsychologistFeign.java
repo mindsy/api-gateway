@@ -1,9 +1,9 @@
 package br.com.mindsy.api.gateway.service.feign;
 
-import br.com.mindsy.api.gateway.dto.PsychologistBackEndDto;
+import br.com.mindsy.api.gateway.dto.psychologist.PsychologistBackEndDto;
 import br.com.mindsy.api.gateway.dto.MessageResponseDto;
-import br.com.mindsy.api.gateway.dto.PsychologistResponseDto;
-import br.com.mindsy.api.gateway.dto.TokenRespnseDto;
+import br.com.mindsy.api.gateway.dto.psychologist.PsychologistResponseDto;
+import br.com.mindsy.api.gateway.dto.authentication.TokenRespnseDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,10 @@
 package br.com.mindsy.api.gateway.service;
 
-import br.com.mindsy.api.gateway.ApiGatewayApplication;
 import br.com.mindsy.api.gateway.dto.*;
-import br.com.mindsy.api.gateway.dto.enums.PhoneTypeEnum;
+import br.com.mindsy.api.gateway.dto.patient.PatientBackendDto;
+import br.com.mindsy.api.gateway.dto.patient.PatientRequestDto;
+import br.com.mindsy.api.gateway.dto.patient.PatientResponseBackDto;
+import br.com.mindsy.api.gateway.dto.patient.PatientResponseDto;
 import br.com.mindsy.api.gateway.exception.ApiGatewayException;
 import br.com.mindsy.api.gateway.exception.ObjectAlredyExistsException;
 import br.com.mindsy.api.gateway.exception.UserNotFoundException;
@@ -65,7 +67,19 @@ public class PatientService {
             if(e.status() == 404) {
                 throw new UserNotFoundException("Paciente não encontrado!", e);
             }
-            throw new ApiGatewayException("Erro Interno", e);
+            throw new ApiGatewayException("Erro Interno!", e);
+        }
+    }
+
+    public MessageResponseDto update(final Long id, final PatientRequestDto patientRequestDto) throws UserNotFoundException, ApiGatewayException {
+        PatientBackendDto patientBackendDto = patientMapper.requestToBack(patientRequestDto);
+        try {
+            return patientFeign.update(id, patientBackendDto);
+        }catch(FeignException e) {
+            if(e.status() == 404) {
+                throw new UserNotFoundException("Paciente não encontrado!", e);
+            }
+            throw new ApiGatewayException("Erro Interno!", e);
         }
     }
 

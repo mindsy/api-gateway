@@ -1,11 +1,12 @@
 package br.com.mindsy.api.gateway.mapper;
 
 import br.com.mindsy.api.gateway.dto.*;
-import org.mapstruct.IterableMapping;
+import br.com.mindsy.api.gateway.dto.patient.PatientBackendDto;
+import br.com.mindsy.api.gateway.dto.patient.PatientRequestDto;
+import br.com.mindsy.api.gateway.dto.patient.PatientResponseBackDto;
+import br.com.mindsy.api.gateway.dto.patient.PatientResponseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface PatientMapper {

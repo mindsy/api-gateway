@@ -1,4 +1,4 @@
-package br.com.mindsy.api.gateway.dto;
+package br.com.mindsy.api.gateway.dto.patient;
 
 import br.com.mindsy.api.gateway.dto.enums.ManualDomainEnum;
 import br.com.mindsy.api.gateway.dto.enums.PhoneTypeEnum;

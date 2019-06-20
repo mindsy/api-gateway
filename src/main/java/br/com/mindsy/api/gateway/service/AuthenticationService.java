@@ -1,7 +1,7 @@
 package br.com.mindsy.api.gateway.service;
 
-import br.com.mindsy.api.gateway.dto.AuthenticationRequestDto;
-import br.com.mindsy.api.gateway.dto.AuthenticationResponseDto;
+import br.com.mindsy.api.gateway.dto.authentication.AuthenticationRequestDto;
+import br.com.mindsy.api.gateway.dto.authentication.AuthenticationResponseDto;
 import br.com.mindsy.api.gateway.dto.MessageResponseDto;
 import br.com.mindsy.api.gateway.exception.ApiGatewayException;
 import br.com.mindsy.api.gateway.exception.UnauthorizadExeption;

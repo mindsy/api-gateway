@@ -1,4 +1,7 @@
-package br.com.mindsy.api.gateway.dto;
+package br.com.mindsy.api.gateway.dto.psychologist;
+
+import br.com.mindsy.api.gateway.dto.HospitalDto;
+import br.com.mindsy.api.gateway.dto.PersonDto;
 
 import java.io.Serializable;
 

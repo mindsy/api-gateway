@@ -1,4 +1,6 @@
-package br.com.mindsy.api.gateway.dto;
+package br.com.mindsy.api.gateway.dto.patient;
+
+import br.com.mindsy.api.gateway.dto.PhoneDto;
 
 import java.io.Serializable;
 import java.util.ArrayList;

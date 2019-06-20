@@ -1,4 +1,4 @@
-package br.com.mindsy.api.gateway.dto;
+package br.com.mindsy.api.gateway.dto.authentication;
 
 import java.io.Serializable;
 
