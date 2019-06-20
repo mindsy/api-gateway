@@ -9,6 +9,7 @@ public class PatientBackendDto implements Serializable {
     private String name;
     private String status;
     private String number;
+    private String email;
     private String telephone_type;
     private String date_of_birth;
     private String kinship_degree;
@@ -113,5 +114,13 @@ public class PatientBackendDto implements Serializable {
 
     public void setCrp(String crp) {
         this.crp = crp;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

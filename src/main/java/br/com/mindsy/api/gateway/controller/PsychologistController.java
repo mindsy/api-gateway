@@ -16,27 +16,27 @@ public class PsychologistController {
     private PsychologistService psychologistService;
 
     @PostMapping
-    public MessageResponseDto insert(@RequestBody PsychologistRequestDto psychologistRequestDto) throws InvalidParameterException, PersonAlredyExistsException, ApiGatewayException {
+    public MessageResponseDto insert(@RequestBody PsychologistRequestDto psychologistRequestDto) throws InvalidParameterException, ObjectAlredyExistsException, ApiGatewayException {
         return psychologistService.insert(psychologistRequestDto);
     }
 
     @PutMapping("/{crp}")
     public MessageResponseDto update(@PathVariable("crp") final String crp, @RequestBody PsychologistRequestDto psychologistRequestDto,
-                                     @RequestHeader("Authorization") final String bearerToken) throws InvalidParameterException, ApiGatewayException, UserNotFoundException, PersonAlredyExistsException, UnauthorizadExeption {
+                                     @RequestHeader("Authorization") final String bearerToken) throws InvalidParameterException, ApiGatewayException, UserNotFoundException, ObjectAlredyExistsException, UnauthorizadExeption {
         psychologistService.validateToken(crp, bearerToken);
         return psychologistService.update(crp, psychologistRequestDto);
     }
 
     @DeleteMapping("/{crp}")
     public MessageResponseDto delete(@PathVariable("crp") final String crp,
-        @RequestHeader("Authorization") final String bearerToken) throws ApiGatewayException, UserNotFoundException, PersonAlredyExistsException, UnauthorizadExeption {
+        @RequestHeader("Authorization") final String bearerToken) throws ApiGatewayException, UserNotFoundException, ObjectAlredyExistsException, UnauthorizadExeption {
         psychologistService.validateToken(crp, bearerToken);
         return psychologistService.delete(crp);
     }
 
     @GetMapping("/{crp}")
     public PsychologistResponseDto find(@PathVariable("crp") final String crp,
-                                        @RequestHeader("Authorization") final String bearerToken) throws ApiGatewayException, UserNotFoundException, PersonAlredyExistsException, UnauthorizadExeption {
+                                        @RequestHeader("Authorization") final String bearerToken) throws ApiGatewayException, UserNotFoundException, ObjectAlredyExistsException, UnauthorizadExeption {
         psychologistService.validateToken(crp, bearerToken);
         return psychologistService.find(crp);
     }

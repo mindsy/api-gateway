@@ -1,25 +1,44 @@
 package br.com.mindsy.api.gateway.dto;
 
+import br.com.mindsy.api.gateway.dto.enums.ManualDomainEnum;
 import br.com.mindsy.api.gateway.dto.enums.PhoneTypeEnum;
 import br.com.mindsy.api.gateway.dto.enums.StatusPatientEnum;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 public class PatientRequestDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @NotBlank
+    @Size(min = 3)
     private String name;
+    @NotNull
     private StatusPatientEnum status;
+    @NotBlank
+    private String email;
+    @NotBlank
+    @Size(min = 8, max = 15)
     private String phoneNumber;
+    @NotNull
     private PhoneTypeEnum phoneType;
+    @NotBlank
     private String birthDate;
+    @NotBlank
     private String kinshipDegree;
+    @NotBlank
     private String scholarity;
+    @NotBlank
     private String observation;
-    private String manualDomain;
+    @NotNull
+    private ManualDomainEnum manualDomain;
     private String registryNumberPat;
+    @NotBlank
     private String registryNumberAcc;
+    @NotBlank
     private String crp;
 
     public String getName() {
@@ -86,11 +105,11 @@ public class PatientRequestDto implements Serializable {
         this.observation = observation;
     }
 
-    public String getManualDomain() {
+    public ManualDomainEnum getManualDomain() {
         return manualDomain;
     }
 
-    public void setManualDomain(String manualDomain) {
+    public void setManualDomain(ManualDomainEnum manualDomain) {
         this.manualDomain = manualDomain;
     }
 
@@ -116,5 +135,13 @@ public class PatientRequestDto implements Serializable {
 
     public void setCrp(String crp) {
         this.crp = crp;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

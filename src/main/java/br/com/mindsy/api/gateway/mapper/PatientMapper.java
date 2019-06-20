@@ -12,9 +12,10 @@ public interface PatientMapper {
     @Mapping(target = "telephone_type", source = "phoneType.descritption")
     @Mapping(target = "date_of_birth", source = "birthDate")
     @Mapping(target = "kinship_degree", source = "kinshipDegree")
-    @Mapping(target = "manual_domain", source = "manualDomain")
+    @Mapping(target = "manual_domain", source = "manualDomain.description")
     @Mapping(target = "registry_number_pat", source = "registryNumberPat")
     @Mapping(target = "registry_number_acc", source = "registryNumberAcc")
+    @Mapping(target = "status", source = "status.description")
     PatientBackendDto requestToBack(PatientRequestDto patientRequestDto);
 
 }

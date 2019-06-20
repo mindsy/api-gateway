@@ -17,7 +17,7 @@ public class PsychologistService {
     @Autowired
     private PsychologistMapper psychologistMapper;
 
-    public MessageResponseDto insert(final PsychologistRequestDto psychologistRequestDto) throws PersonAlredyExistsException, InvalidParameterException, ApiGatewayException {
+    public MessageResponseDto insert(final PsychologistRequestDto psychologistRequestDto) throws ObjectAlredyExistsException, InvalidParameterException, ApiGatewayException {
         PsychologistBackEndDto psychologistBackEndDto = psychologistMapper.requestToBack(psychologistRequestDto);
 
         try {
@@ -26,7 +26,7 @@ public class PsychologistService {
 
             switch (e.status()) {
                 case 422:
-                    throw new PersonAlredyExistsException("Psicólogo já cadastrado!", e);
+                    throw new ObjectAlredyExistsException("Psicólogo já cadastrado!", e);
                 case 400:
                     throw new InvalidParameterException("Email ou telephone já cadastrado!", e);
                 default:
@@ -83,7 +83,7 @@ public class PsychologistService {
     }
 
     public void validateToken(final String crp, String token)
-            throws PersonAlredyExistsException, ApiGatewayException, UnauthorizadExeption {
+            throws ObjectAlredyExistsException, ApiGatewayException, UnauthorizadExeption {
         try {
             TokenRespnseDto tokenRespnseDto = psychologistFeign.getToken(crp);
             token = token.replace("Bearer ", "").trim();
@@ -93,7 +93,7 @@ public class PsychologistService {
         } catch (FeignException e) {
             switch (e.status()) {
                 case 404:
-                    throw new PersonAlredyExistsException("Usuário não encontrado", e);
+                    throw new ObjectAlredyExistsException("Usuário não encontrado", e);
                 case 401:
                     throw new UnauthorizadExeption("Não autorizado");
                 default:

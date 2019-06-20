@@ -3,7 +3,7 @@ package br.com.mindsy.api.gateway.controller;
 import br.com.mindsy.api.gateway.dto.MessageResponseDto;
 import br.com.mindsy.api.gateway.dto.PatientRequestDto;
 import br.com.mindsy.api.gateway.exception.ApiGatewayException;
-import br.com.mindsy.api.gateway.exception.PersonAlredyExistsException;
+import br.com.mindsy.api.gateway.exception.ObjectAlredyExistsException;
 import br.com.mindsy.api.gateway.exception.UnauthorizadExeption;
 import br.com.mindsy.api.gateway.service.PatientService;
 import br.com.mindsy.api.gateway.service.PsychologistService;
@@ -23,9 +23,11 @@ public class PatientController {
     @PostMapping
     public MessageResponseDto insert(@RequestBody PatientRequestDto patientRequestDto,
                                      @RequestHeader("Authorization") final String bearerToken,
-                                     @RequestHeader("crp") final String crp) throws ApiGatewayException, PersonAlredyExistsException, UnauthorizadExeption {
+                                     @RequestHeader("crp") final String crp) throws ApiGatewayException, ObjectAlredyExistsException, UnauthorizadExeption {
         psychologistService.validateToken(crp, bearerToken);
         return patientService.insert(patientRequestDto);
     }
+
+
 
 }

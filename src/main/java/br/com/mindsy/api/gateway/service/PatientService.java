@@ -3,6 +3,8 @@ package br.com.mindsy.api.gateway.service;
 import br.com.mindsy.api.gateway.dto.MessageResponseDto;
 import br.com.mindsy.api.gateway.dto.PatientBackendDto;
 import br.com.mindsy.api.gateway.dto.PatientRequestDto;
+import br.com.mindsy.api.gateway.exception.ApiGatewayException;
+import br.com.mindsy.api.gateway.exception.ObjectAlredyExistsException;
 import br.com.mindsy.api.gateway.mapper.PatientMapper;
 import br.com.mindsy.api.gateway.service.feign.PatientFeign;
 import feign.FeignException;
@@ -19,13 +21,16 @@ public class PatientService {
     private PatientMapper patientMapper;
 
 
-    public MessageResponseDto insert(PatientRequestDto patientRequestDto) {
+    public MessageResponseDto insert(PatientRequestDto patientRequestDto) throws ObjectAlredyExistsException, ApiGatewayException {
         PatientBackendDto patientBackendDto = patientMapper.requestToBack(patientRequestDto);
         try {
             return patientFeign.insert(patientBackendDto);
         }catch(FeignException e) {
-            System.out.println(e.getMessage());
-            return null;
+            if(e.status() == 422) {
+                throw new ObjectAlredyExistsException("Dados já cadastrados", e);
+            }
+            throw new ApiGatewayException("Erro Interno", e);
+
         }
 
     }

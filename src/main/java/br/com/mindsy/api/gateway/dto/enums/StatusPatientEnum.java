@@ -6,9 +6,17 @@ public enum StatusPatientEnum {
     FINALIZED("finalizado"),
     WAITING("aguardando");
 
-    private String description;
+    public String description;
 
     StatusPatientEnum(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
         this.description = description;
     }
 }
