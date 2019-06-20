@@ -1,24 +1,12 @@
 package br.com.mindsy.api.gateway.service;
 
-import br.com.mindsy.api.gateway.dto.MessageResponseDto;
-import br.com.mindsy.api.gateway.dto.PsychologistBackEndDto;
-import br.com.mindsy.api.gateway.dto.PsychologistRequestDto;
-import br.com.mindsy.api.gateway.dto.PsychologistResponseDto;
-import br.com.mindsy.api.gateway.exception.ApiGatewayException;
-import br.com.mindsy.api.gateway.exception.InvalidParameterException;
-import br.com.mindsy.api.gateway.exception.PersonAlredyExistsException;
-import br.com.mindsy.api.gateway.exception.UserNotFoundException;
+import br.com.mindsy.api.gateway.dto.*;
+import br.com.mindsy.api.gateway.exception.*;
 import br.com.mindsy.api.gateway.mapper.PsychologistMapper;
-import br.com.mindsy.api.gateway.model.PersonEntity;
-import br.com.mindsy.api.gateway.model.PsychologistEntity;
-import br.com.mindsy.api.gateway.repository.PersonRepository;
-import br.com.mindsy.api.gateway.repository.PsychologistRepository;
 import br.com.mindsy.api.gateway.service.feign.PsychologistFeign;
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class PsychologistService {
@@ -28,12 +16,6 @@ public class PsychologistService {
 
     @Autowired
     private PsychologistMapper psychologistMapper;
-
-    @Autowired
-    private PsychologistRepository psychologistRepository;
-
-    @Autowired
-    private PersonRepository personRepository;
 
     public MessageResponseDto insert(final PsychologistRequestDto psychologistRequestDto) throws PersonAlredyExistsException, InvalidParameterException, ApiGatewayException {
         PsychologistBackEndDto psychologistBackEndDto = psychologistMapper.requestToBack(psychologistRequestDto);
@@ -53,9 +35,10 @@ public class PsychologistService {
         }
     }
 
-    public MessageResponseDto update(final String crp, final PsychologistRequestDto psychologistRequestDto) throws InvalidParameterException, ApiGatewayException, UserNotFoundException {
-        PsychologistBackEndDto psychologistBackEndDto = psychologistMapper.requestToBack(psychologistRequestDto);
+    public MessageResponseDto update(final String crp, final PsychologistRequestDto psychologistRequestDto)
+            throws InvalidParameterException, ApiGatewayException, UserNotFoundException {
 
+        PsychologistBackEndDto psychologistBackEndDto = psychologistMapper.requestToBack(psychologistRequestDto);
         try {
             return psychologistFeign.update(crp, psychologistBackEndDto);
         } catch (FeignException e) {
@@ -68,10 +51,10 @@ public class PsychologistService {
                     throw new ApiGatewayException("Erro Interno", e);
             }
         }
-
     }
 
-    public MessageResponseDto delete(final String crp) throws UserNotFoundException, ApiGatewayException {
+    public MessageResponseDto delete(final String crp)
+            throws UserNotFoundException, ApiGatewayException {
 
         try {
             return psychologistFeign.delete(crp);
@@ -84,7 +67,8 @@ public class PsychologistService {
         }
     }
 
-    public PsychologistResponseDto find(final String crp) throws UserNotFoundException, ApiGatewayException {
+    public PsychologistResponseDto find(final String crp)
+            throws UserNotFoundException, ApiGatewayException {
 
         try {
             return psychologistFeign.find(crp);
@@ -98,8 +82,24 @@ public class PsychologistService {
 
     }
 
-    public boolean validateToken(final String crp) {
-        return true;
+    public void validateToken(final String crp, String token)
+            throws PersonAlredyExistsException, ApiGatewayException, UnauthorizadExeption {
+        try {
+            TokenRespnseDto tokenRespnseDto = psychologistFeign.getToken(crp);
+            token = token.replace("Bearer ", "").trim();
+            if(tokenRespnseDto.getToken() == null || !tokenRespnseDto.getToken().equalsIgnoreCase(token)) {
+                throw new UnauthorizadExeption("Não autorizado");
+            }
+        } catch (FeignException e) {
+            switch (e.status()) {
+                case 404:
+                    throw new PersonAlredyExistsException("Usuário não encontrado", e);
+                case 401:
+                    throw new UnauthorizadExeption("Não autorizado");
+                default:
+                    throw new ApiGatewayException("Erro Interno", e);
+            }
+        }
     }
 
 }

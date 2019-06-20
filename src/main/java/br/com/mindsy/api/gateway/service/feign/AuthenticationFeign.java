@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 @Service
-@FeignClient(name = "psychologist", url = "${url.backend.authentication}")
+@FeignClient(name = "authentication", url = "${url.backend.authentication}")
 public interface AuthenticationFeign {
 
     @PostMapping("/login")
     AuthenticationResponseDto login(@RequestBody final AuthenticationRequestDto authenticationRequestDto);
 
-    @PutMapping("/logout/{crp}")
+    @PostMapping("/logout/{crp}")
     MessageResponseDto logout(@RequestHeader("Authorization") final String bearerToken, @PathVariable("crp") final String crp);
 
 }

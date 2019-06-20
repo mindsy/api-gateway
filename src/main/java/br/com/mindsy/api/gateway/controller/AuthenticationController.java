@@ -4,6 +4,7 @@ import br.com.mindsy.api.gateway.dto.AuthenticationRequestDto;
 import br.com.mindsy.api.gateway.dto.AuthenticationResponseDto;
 import br.com.mindsy.api.gateway.dto.MessageResponseDto;
 import br.com.mindsy.api.gateway.exception.ApiGatewayException;
+import br.com.mindsy.api.gateway.exception.PersonAlredyExistsException;
 import br.com.mindsy.api.gateway.exception.UnauthorizadExeption;
 import br.com.mindsy.api.gateway.service.AuthenticationService;
 import br.com.mindsy.api.gateway.service.PsychologistService;
@@ -27,8 +28,8 @@ public class AuthenticationController {
     }
 
     @PutMapping("/logout/{crp}")
-    public MessageResponseDto logout(@PathVariable("crp") final String crp, @RequestHeader("Authorization") final String bearerToken) throws UnauthorizadExeption, ApiGatewayException {
-        psychologistService.validateToken(crp);
+    public MessageResponseDto logout(@PathVariable("crp") final String crp, @RequestHeader("Authorization") final String bearerToken) throws UnauthorizadExeption, ApiGatewayException, PersonAlredyExistsException {
+        psychologistService.validateToken(crp, bearerToken);
         return authenticationService.logout(bearerToken, crp);
     }
 }

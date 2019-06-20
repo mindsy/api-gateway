@@ -10,7 +10,6 @@ public class PsychologistDto implements Serializable {
     private String date_of_birth;
     private String password;
 
-
     public String getCrp() {
         return crp;
     }
