@@ -15,4 +15,8 @@ public enum PhoneTypeEnum {
     public String getDescritption() {
         return descritption;
     }
+
+    public void setDescritption(String descritption) {
+        this.descritption = descritption;
+    }
 }

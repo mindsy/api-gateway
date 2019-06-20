@@ -6,22 +6,22 @@ public class PhoneDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String number;
-    private String telephone_type;
+    private String phoneNumber;
+    private String phoneType;
 
-    public String getNumber() {
-        return number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getTelephone_type() {
-        return telephone_type;
+    public String getPhoneType() {
+        return phoneType;
     }
 
-    public void setTelephone_type(String telephone_type) {
-        this.telephone_type = telephone_type;
+    public void setPhoneType(String phoneType) {
+        this.phoneType = phoneType;
     }
 }

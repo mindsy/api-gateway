@@ -10,7 +10,7 @@ public class PersonDto implements Serializable {
     private String id_person;
     private String name;
     private String email;
-    private List<PhoneDto> telephone;
+    private List<PhoneBackendDto> telephone;
 
     public String getId_person() {
         return id_person;
@@ -36,11 +36,11 @@ public class PersonDto implements Serializable {
         this.email = email;
     }
 
-    public List<PhoneDto> getTelephone() {
+    public List<PhoneBackendDto> getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(List<PhoneDto> telephone) {
+    public void setTelephone(List<PhoneBackendDto> telephone) {
         this.telephone = telephone;
     }
 }
