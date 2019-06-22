@@ -90,9 +90,13 @@ public class PsychologistService {
             throws UnauthorizadExeption {
         TokenRespnseDto tokenRespnseDto = psychologistFeign.getToken(crp);
         token = token.replace("Bearer ", "").trim();
-        if(tokenRespnseDto.getToken() == null || !tokenRespnseDto.getToken().equalsIgnoreCase(token)) {
+        if(isEmpty(tokenRespnseDto.getToken()) || !tokenRespnseDto.getToken().equalsIgnoreCase(token)) {
             throw new UnauthorizadExeption("Não autorizado");
         }
 
+    }
+
+    public boolean isEmpty(String string) {
+        return (string == null || string.isEmpty());
     }
 }
