@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/psychologists")
+@CrossOrigin
 public class PsychologistController {
 
     @Autowired
