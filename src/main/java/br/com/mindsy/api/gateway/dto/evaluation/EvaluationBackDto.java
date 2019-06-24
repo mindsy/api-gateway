@@ -2,16 +2,23 @@ package br.com.mindsy.api.gateway.dto.evaluation;
 
 import java.io.Serializable;
 
-public class EvaluationBackendDto implements Serializable {
+public class EvaluationBackDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private Long id_evaluation;
     private String conclusion;
     private String anamnese;
     private String dt_start;
     private String dt_end;
-    private String crp;
-    private Long id_patient;
+
+    public Long getId_evaluation() {
+        return id_evaluation;
+    }
+
+    public void setId_evaluation(Long id_evaluation) {
+        this.id_evaluation = id_evaluation;
+    }
 
     public String getConclusion() {
         return conclusion;
@@ -43,21 +50,5 @@ public class EvaluationBackendDto implements Serializable {
 
     public void setDt_end(String dt_end) {
         this.dt_end = dt_end;
-    }
-
-    public String getCrp() {
-        return crp;
-    }
-
-    public void setCrp(String crp) {
-        this.crp = crp;
-    }
-
-    public Long getId_patient() {
-        return id_patient;
-    }
-
-    public void setId_patient(Long id_patient) {
-        this.id_patient = id_patient;
     }
 }
