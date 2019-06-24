@@ -12,4 +12,5 @@ public interface EvaluationMapper {
     @Mapping(source = "endDate", target = "dt_end")
     @Mapping(source = "idPatient", target = "id_patient")
     EvaluationBackendDto requestToBack(EvaluationRequestDto evaluationRequestDto);
+
 }
