@@ -48,9 +48,9 @@ public class PsychologistService {
         } catch (FeignException e) {
             switch (e.status()) {
                 case 404:
-                    throw new UserNotFoundException("Psicólogo já cadastrado!", e);
+                    throw new UserNotFoundException("Psicólogo não encontado!", e);
                 case 400:
-                    throw new InvalidParameterException("Usuário não encontrado!", e);
+                    throw new InvalidParameterException("Dados inválidos!", e);
                 default:
                     throw new ApiGatewayException("Erro Interno", e);
             }
