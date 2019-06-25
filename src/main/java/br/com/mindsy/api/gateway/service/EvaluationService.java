@@ -81,4 +81,15 @@ public class EvaluationService {
         }
     }
 
+    public MessageResponseDto delete(final Long id) throws UserNotFoundException, ApiGatewayException {
+        try {
+            return evaluationFeign.delete(id);
+        } catch (FeignException e) {
+            if(e.status() == 404) {
+                throw new UserNotFoundException("Avaliação não encontada!", e);
+            }
+            throw new ApiGatewayException("Erro Interno!", e);
+        }
+    }
+
 }

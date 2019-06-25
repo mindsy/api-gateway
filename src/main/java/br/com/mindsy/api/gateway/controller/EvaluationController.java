@@ -52,4 +52,13 @@ public class EvaluationController {
 
     }
 
+    @DeleteMapping("/{id}")
+    public MessageResponseDto delete(@PathVariable("id") final Long id,
+                                     @RequestHeader("crp") final String crp,
+                                     @RequestHeader("Authorization") final String bearerToken)
+            throws UnauthorizadExeption, UserNotFoundException, ApiGatewayException {
+
+        psychologistService.validateToken(crp, bearerToken);
+        return evaluationService.delete(id);
+    }
 }

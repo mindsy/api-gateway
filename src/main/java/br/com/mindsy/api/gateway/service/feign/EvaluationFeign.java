@@ -21,4 +21,7 @@ public interface EvaluationFeign {
     @GetMapping("/psychologist-evaluation/{crp}/{idPatient}")
     EvaluationBackResponseDto getAll(@PathVariable("idPatient") final Long idPatient,
                                      @PathVariable("crp")  final String crp);
+
+    @DeleteMapping("/evaluation/{id}")
+    MessageResponseDto delete(@PathVariable("id") final Long id);
 }
